@@ -22,6 +22,10 @@ tcp_game
    │  ├─ handlerIds.js
    │  └─ header.js
    ├─ db
+   │  └─ migration
+   │     └─ createSchemas.js            //(new) sql 쿼리 실행
+   │  └─ sql
+   │     └─ user_db.sql                 //(new) user_db에 사용할 sql문
    │  └─ database.js                    //(new) 커넥션 풀 생성, 쿼리실행 시 로그
    ├─ events
    │  ├─ onConnection.js
