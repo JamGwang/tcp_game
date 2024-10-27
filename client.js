@@ -7,6 +7,16 @@ const PACKET_TYPE_LENGTH = 1; // 패킷타입을 나타내는 1바이트
 let userId;
 let sequence;
 
+const readHeader = (buffer) => {
+    return {
+        handlerId,
+        userId: '1',
+        clientVersion,
+        sequence: 0,
+        payload: payloadBuffer,
+    };
+};
+
 const createPacket = (handlerId, payload, clientVersion = '1.0.0', type, name) => {
     const protoMessages = getProtoMessages();
     const PayloadType = protoMessages[type][name];
@@ -62,7 +72,6 @@ client.connect(PORT, HOST, async () => {
     await loadProtos();
 
     const successPacket = createPacket(0, { deviceId: 'xxxxx' }, '1.0.0', 'initial', 'InitialPacket');
-    console.log(successPacket);
     sendPacket(client, successPacket);
 });
 
@@ -73,7 +82,7 @@ client.on('data', (data) => {
 
     // 2. 패킷 타입 정보 수신 (1바이트)
     const packetType = data.readUInt8(4);
-    const packet = data.slice(totalHeaderLength, length); // 패킷 데이터
+    const packet = data.slice(totalHeaderLength, totalHeaderLength + length); // 패킷 데이터
 
     if (packetType === 1) {
         const protoMessages = getProtoMessages();
