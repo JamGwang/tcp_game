@@ -5,8 +5,8 @@ import CustomError from '../error/customError.js';
 import { ErrorCodes } from '../error/errorCodes.js';
 
 export const packetParser = (data) => {
+    console.log('패킷 파싱중');
     const protoMessages = getProtoMessages();
-
     // 공통 패킷 구조를 디코딩
     const Packet = protoMessages.common.Packet;
     let packet;
