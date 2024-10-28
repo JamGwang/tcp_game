@@ -49,6 +49,9 @@ export const onData = (socket) => async (data) => {
               userId,
               payload,
             });
+            break;
+          default:
+            throw new CustomError(ErrorCodes.UNKNOWN_PACKET_TYPE, '패킷 타입이 존재하지 않습니다.');
         }
       } catch (error) {
         handleError(socket, error);
