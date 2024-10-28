@@ -1,3 +1,4 @@
+// 게임 접속 테스트용 클라이언트
 import net from 'net';
 import { getProtoMessages, loadProtos } from './src/init/loadProtos.js';
 
@@ -6,17 +7,8 @@ const PACKET_TYPE_LENGTH = 1; // 패킷타입을 나타내는 1바이트
 
 let userId;
 let sequence;
-const deviceId = 'xxxx1x';
-
-const readHeader = (buffer) => {
-    return {
-        handlerId,
-        userId: '1',
-        clientVersion,
-        sequence: 0,
-        payload: payloadBuffer,
-    };
-};
+const deviceId = 'xxxxx';
+let gameId = 'cba598c2-5b56-49ef-9665-1f41e5d34c45';// npm run start로 서버 실행 -> 클라이언트1 실행 -> 생성된 게임id를 붙여넣기
 
 const createPacket = (handlerId, payload, clientVersion = '1.0.0', type, name) => {
     const protoMessages = getProtoMessages();
@@ -80,11 +72,11 @@ client.connect(PORT, HOST, async () => {
     await delay(500);
 
     const createGamePacket = createPacket(
-        4,
-        { timestamp: Date.now() },
+        5,
+        { timestamp: Date.now(), gameId },
         '1.0.0',
         'game',
-        'CreateGamePayload',
+        'JoinGamePayload',
     );
 
     await sendPacket(client, createGamePacket);
