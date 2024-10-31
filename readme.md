@@ -44,8 +44,9 @@ tcp_game
    ├─ handlers
    │  ├─ game
    │  │  ├─ createGame.handler.js
-   │  │  └─ joinGame.handler.js
-   │  ├─ index.js
+   │  │  ├─ joinGame.handler.js
+   │  │  └─ updateLocation.handler.js     // (new)위치 동기화 핸들러
+   │  ├─ index.js                         // 위치동기화 매핑
    │  └─ user
    │     └─ initial.handler.js
    ├─ init

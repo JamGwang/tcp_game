@@ -18,6 +18,10 @@ const handlers = {
         handler: joinGameHandler,
         protoType: 'game.JoinGamePayload',
     },
+    [HANDLER_IDS.UPDATE_LOCATION]: {
+        handler: updateLocationHandler,
+        protoType: 'game.LocationUpdatePayload',
+    },
 };
 
 export const getHandlerById = (handlerId) => {
