@@ -19,17 +19,15 @@ export const onData = (socket) => async (data) => {
   while (socket.buffer.length >= totalHeaderLength) {
     // 1. 패킷 길이 정보 수신 (4바이트)
     const length = socket.buffer.readUInt32BE(0);
-
     // 2. 패킷 타입 정보 수신 (1바이트)
     const packetType = socket.buffer.readUInt8(config.packet.totalLength);
     // 3. 패킷 전체 길이 확인 후 데이터 수신
     if (socket.buffer.length >= length) {
       // 패킷 데이터를 자르고 버퍼에서 제거
-      const packet = socket.buffer.slice(totalHeaderLength, length);
-      socket.buffer = socket.buffer.slice(length);
+      const packet = socket.buffer.subarray(totalHeaderLength, length);
+      socket.buffer = socket.buffer.subarray(length);
 
-      console.log(`length: ${length}`);
-      console.log(`packetType: ${packetType}`);
+      console.log(`length: ${length}`, `packetType: ${packetType}`);
 
       try {
         switch (packetType) {
@@ -46,20 +44,10 @@ export const onData = (socket) => async (data) => {
             }
             break;
           case PACKET_TYPE.NORMAL:
-            const { handlerId, sequence, payload, userId } = packetParser(packet);
-
-            const user = getUserById(userId);
-            // 유저가 접속해 있는 상황에서 시퀀스 검증
-            if (user && user.sequence !== sequence) {
-              throw new CustomError(ErrorCodes.INVALID_SEQUENCE, '잘못된 호출 값입니다. ');
-            }
+            const { handlerId, userId, payload } = packetParser(packet);
 
             const handler = getHandlerById(handlerId);
-            await handler({
-              socket,
-              userId,
-              payload,
-            });
+            await handler({ socket, userId, payload, });
             break;
           default:
             throw new CustomError(ErrorCodes.UNKNOWN_PACKET_TYPE, '패킷 타입이 존재하지 않습니다.');

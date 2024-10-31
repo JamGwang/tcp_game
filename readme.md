@@ -11,19 +11,17 @@ tcp_game
 │  ├─ item.json
 │  ├─ item_unlock.json
 │  └─ stage.json
-├─ client.js
-├─ client2.js
 ├─ package-lock.json
 ├─ package.json
 ├─ readme.md
 └─ src
    ├─ classes
    │  └─ managers
-   │     ├─ base.manager.js            // (new)모든 매니저클래스의 뼈대클래스 (부모클래스)
-   │     └─ interval.manager.js        // (new)인터벌 매니저
+   │     ├─ base.manager.js
+   │     └─ interval.manager.js
    │  └─ models
-   │     ├─ game.class.js              // 인터벌매니저 인스턴스 추가
-   │     └─ user.class.js              // 핑패킷생성 추가
+   │     ├─ game.class.js
+   │     └─ user.class.js
    ├─ config
    │  └─ config.js
    ├─ constants
@@ -38,15 +36,13 @@ tcp_game
    │  └─ database.js
    ├─ events
    │  ├─ onConnection.js
-   │  ├─ onData.js                       // 핑 패킷타입 읽기 추가
+   │  ├─ onData.js
    │  ├─ onEnd.js
    │  └─ onError.js
    ├─ handlers
    │  ├─ game
-   │  │  ├─ createGame.handler.js
-   │  │  ├─ joinGame.handler.js
-   │  │  └─ updateLocation.handler.js     // (new)위치 동기화 핸들러
-   │  ├─ index.js                         // 위치동기화 매핑
+   │  │  └─ updateLocation.handler.js
+   │  ├─ index.js
    │  └─ user
    │     └─ initial.handler.js
    ├─ init
@@ -54,9 +50,9 @@ tcp_game
    │  ├─ index.js
    │  └─ loadProtos.js
    ├─ protobuf
-   │  ├─ packetNames.js                 // 핑 패킷 매핑
+   │  ├─ packetNames.js
    │  ├─ request
-   │  │  ├─ common.proto                // 핑 패킷구조 추가
+   │  │  ├─ common.proto
    │  │  ├─ game.proto
    │  │  └─ initial.proto
    │  └─ response
@@ -65,7 +61,7 @@ tcp_game
    ├─ session
    │  ├─ game.session.js
    │  ├─ sessions.js
-   │  └─ user.session.js                // 소켓으로 유저찾는 기능 추가
+   │  └─ user.session.js
    └─ utils
       ├─ dateFormatter.js
       ├─ db
@@ -75,7 +71,7 @@ tcp_game
       │  ├─ errorCodes.js
       │  └─ errorHandler.js
       ├─ notification
-      │  └─ game.notification.js          //(new) 게임의 모든 알림 관리
+      │  └─ game.notification.js
       ├─ parser
       │  └─ packetParser.js
       └─ response

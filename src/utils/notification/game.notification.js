@@ -27,7 +27,7 @@ export const createLocationPacket = (users) => {
 
     return makeNotification(locationPacket, PACKET_TYPE.LOCATION);
 };
-
+//사용되지는 않고있는 메소드 들
 export const gameStartNotification = (gameId, timestamp) => {
     const protoMessages = getProtoMessages();
     const Start = protoMessages.gameNotification.Start;

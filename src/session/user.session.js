@@ -1,8 +1,8 @@
 import User from '../classes/models/user.class..js';
 import { userSessions } from './sessions.js';
 
-export const addUser = (socket, uuid) => {
-  const user = new User(uuid, socket);
+export const addUser = (socket, uuid, playerId, latency) => {
+  const user = new User(socket, uuid, playerId, latency);
   userSessions.push(user);
   return user;
 };
@@ -16,14 +16,6 @@ export const removeUser = (socket) => {
 
 export const getUserById = (id) => {
   return userSessions.find((user) => user.id === id);
-};
-// 시퀀스 증가
-export const getNextSequence = (id) => {
-  const user = getUserById(id);
-  if (user) {
-    return user.getNextSequence();
-  }
-  return null;
 };
 
 // 소켓으로 유저 찾기

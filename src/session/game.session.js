@@ -7,15 +7,12 @@ export const addGameSession = (id) => {
     return session;
 }
 
-export const removeGameSession = (id) => {
-    const index = gameSessions.findIndex((game) => game.id === id);
-    if (index !== -1) {
-        return gameSessions.splice(index, 1)[0];
-    }
+export const removeGameSession = () => {
+    delete gameSessions[0];
 }
 
-export const getGameSession = (id) => {
-    return gameSessions.find((game) => game.id === id);
+export const getGameSession = () => {
+    return gameSessions[0];
 }
 
 export const getAllGameSessions = () => {
