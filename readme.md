@@ -12,15 +12,18 @@ tcp_game
 │  ├─ item_unlock.json
 │  └─ stage.json
 ├─ client.js
-├─ client2.js                          // (new) 게임 입장 테스트 클라이언트
+├─ client2.js
 ├─ package-lock.json
 ├─ package.json
 ├─ readme.md
 └─ src
    ├─ classes
+   │  └─ managers
+   │     ├─ base.manager.js            // (new)모든 매니저클래스의 뼈대클래스 (부모클래스)
+   │     └─ interval.manager.js        // (new)인터벌 매니저
    │  └─ models
-   │     ├─ game.class.js              // (new) 게임 클래스 정의
-   │     └─ user.class.js              // (new) 유저 클래스 정의
+   │     ├─ game.class.js              // 인터벌매니저 인스턴스 추가
+   │     └─ user.class.js              // 핑패킷생성 추가
    ├─ config
    │  └─ config.js
    ├─ constants
@@ -35,13 +38,13 @@ tcp_game
    │  └─ database.js
    ├─ events
    │  ├─ onConnection.js
-   │  ├─ onData.js
+   │  ├─ onData.js                       // 핑 패킷타입 읽기 추가
    │  ├─ onEnd.js
    │  └─ onError.js
    ├─ handlers
    │  ├─ game
-   │  │  ├─ createGame.handler.js      // (new)게임 생성 핸들러
-   │  │  └─ joinGame.handler.js        // (new)게임 참가 핸들러
+   │  │  ├─ createGame.handler.js
+   │  │  └─ joinGame.handler.js
    │  ├─ index.js
    │  └─ user
    │     └─ initial.handler.js
@@ -50,18 +53,18 @@ tcp_game
    │  ├─ index.js
    │  └─ loadProtos.js
    ├─ protobuf
-   │  ├─ packetNames.js                 // 게임 프로토콜 버퍼 매핑 추가
+   │  ├─ packetNames.js                 // 핑 패킷 매핑
    │  ├─ request
-   │  │  ├─ common.proto
-   │  │  ├─ game.proto                  // (new)게임 프로토콜 버퍼
+   │  │  ├─ common.proto                // 핑 패킷구조 추가
+   │  │  ├─ game.proto
    │  │  └─ initial.proto
    │  └─ response
    │     └─ reponse.proto
    ├─ server.js
    ├─ session
-   │  ├─ game.session.js                // (new) 게임 세션 관리 메소드
+   │  ├─ game.session.js
    │  ├─ sessions.js
-   │  └─ user.session.js                // user클래스 활용
+   │  └─ user.session.js                // 소켓으로 유저찾는 기능 추가
    └─ utils
       ├─ dateFormatter.js
       ├─ db
@@ -70,6 +73,8 @@ tcp_game
       │  ├─ customError.js
       │  ├─ errorCodes.js
       │  └─ errorHandler.js
+      ├─ notification
+      │  └─ game.notification.js          //(new) 게임의 모든 알림 관리
       ├─ parser
       │  └─ packetParser.js
       └─ response

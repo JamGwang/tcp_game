@@ -1,3 +1,5 @@
+import IntervalManager from "../managers/interval.manager.js";
+
 const MAX_PLAYERS = 4;
 
 class Game {
@@ -5,6 +7,7 @@ class Game {
         // 게임 세션의 고유id
         this.id = id;
         this.users = [];
+        this.intervalManager = new IntervalManager();
         this.state = 'waiting'; // 'waiting', 'inProgress'
     }
 
@@ -14,6 +17,7 @@ class Game {
         }
         this.users.push(user);
 
+        this.intervalManager.addPlayer(user.id, user.ping.bind(user), 1000); // 테스트 interval 1초
         if (this.users.length === MAX_PLAYERS) {
             setTimeout(() => {
                 this.startGame();
@@ -27,7 +31,7 @@ class Game {
 
     removeUser(userId) {
         this.users = this.users.filter((user) => user.id !== userId);
-
+        this.intervalManager.removePlayer(userId);
         if (this.users.length < MAX_PLAYERS) {
             this.state = 'waiting';
         }
