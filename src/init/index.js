@@ -2,7 +2,6 @@
 import pools from '../db/database.js';
 import { testAllConnections } from '../utils/db/testConnection.js';
 import { addGameSession } from '../session/game.session.js';
-import { loadGameAssets } from './assets.js';
 import { loadProtos } from './loadProtos.js';
 import { v4 as uuidv4 } from 'uuid';
 

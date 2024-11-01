@@ -1,14 +1,14 @@
 import { createPingPacket } from "../../utils/notification/game.notification.js";
 
 class User {
-    constructor(socket, id, playerId, latency) {
+    constructor(socket, id, playerId, latency, coords) {
         this.id = id;
         this.socket = socket;
         this.playerId = playerId;
         this.latency = latency
-        // 유저 위치 초기화
-        this.x = 0;
-        this.y = 0;
+
+        this.x = coords.x;
+        this.y = coords.y;
 
         this.lastUpdateTime = Date.now();
     }

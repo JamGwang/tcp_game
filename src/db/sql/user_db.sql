@@ -13,3 +13,8 @@ CREATE TABLE IF NOT EXISTS game_end (
         score INT DEFAULT 0,
         FOREIGN KEY (user_id) REFERENCES user (id)
     );
+
+ALTER TABLE user
+ADD COLUMN x_coord DOUBLE NOT NULL DEFAULT 0;
+ALTER TABLE user
+ADD COLUMN y_coord DOUBLE NOT NULL DEFAULT 0;

@@ -1,15 +1,7 @@
 syntax = "proto3";
 
 package game;
-// 게임 생성 핸들러 페이로드
-message CreateGamePayload{
-    int64 timestamp = 1;
-}
-// 게임 참가 핸들러 페이로드
-message JoinGamePayload{
-    string gameId = 1;
-    int64 timestamp = 2;
-}
+
 // 위치 정보 업데이트 핸들러 페이로드
 message LocationUpdatePayload {  
   float x = 1;

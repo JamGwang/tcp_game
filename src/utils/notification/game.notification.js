@@ -27,17 +27,6 @@ export const createLocationPacket = (users) => {
 
     return makeNotification(locationPacket, PACKET_TYPE.LOCATION);
 };
-//사용되지는 않고있는 메소드 들
-export const gameStartNotification = (gameId, timestamp) => {
-    const protoMessages = getProtoMessages();
-    const Start = protoMessages.gameNotification.Start;
-
-    const payload = { gameId, timestamp };
-    const message = Start.create(payload);
-    const startPacket = Start.encode(message).finish();
-
-    return makeNotification(startPacket, PACKET_TYPE.GAME_START);
-};
 
 export const createPingPacket = (timestamp) => {
     const protoMessages = getProtoMessages();
