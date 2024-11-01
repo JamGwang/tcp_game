@@ -6,7 +6,6 @@ import { ErrorCodes } from '../error/errorCodes.js';
 
 export const packetParser = (data) => {
     const protoMessages = getProtoMessages();
-
     // 공통 패킷 구조를 디코딩
     const Packet = protoMessages.common.Packet;
     let packet;
@@ -18,9 +17,8 @@ export const packetParser = (data) => {
 
     const handlerId = packet.handlerId;
     const userId = packet.userId;
-    const clientVersion = packet.clientVersion;
-    const sequence = packet.sequence;
-
+    const clientVersion = packet.version;
+    console.log('실행한 클라이언트 버전: ', packet.version);
     // clientVersion 검증
     if (clientVersion !== config.client.version) {
         throw new CustomError(
@@ -55,5 +53,5 @@ export const packetParser = (data) => {
         );
     }
 
-    return { handlerId, userId, payload, sequence };
+    return { handlerId, userId, payload };
 };

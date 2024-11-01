@@ -1,56 +1,75 @@
-```
-TCP 멀티플레이 프로젝트
+#### TCP 멀티플레이 프로젝트
 
+유저, 게임 클래스 생성 및 관리
+게임 생성, 게임 입장
+
+```
 tcp_game
-├─ .env // 환경 변수, 상수
 ├─ .gitignore
 ├─ .prettierrc
-├─ assets
-│  ├─ item.json
-│  ├─ item_unlock.json
-│  └─ stage.json
-├─ client.js // 클라이언트 코드
 ├─ package-lock.json
 ├─ package.json
 ├─ readme.md
 └─ src
+   ├─ classes                                      // 클래스 정의
+   │  ├─ managers
+   │  │  ├─ base.manager.js
+   │  │  └─ interval.manager.js
+   │  └─ models
+   │     ├─ game.class.js
+   │     └─ user.class.js
    ├─ config
-   │  └─ config.js // 상수와 환경변수 사용을 위해 접근해야 할 곳
+   │  └─ config.js                                 // 상수와 환경변수 사용을 위해 접근해야 할 파일
    ├─ constants
-   │  ├─ env.js // 환경 변수, 상수 관리 (중앙 집중식 관리)
-   │  ├─ handlerIds.js // 핸들러ID 지정
-   │  └─ header.js	// 패킷 헤더 관련 상수
-   ├─ events	// 이벤트별 분리
-   │  ├─ onConnection.js // 소켓 연결설정 이벤트
-   │  ├─ onData.js // 데이터 수신 이벤트
-   │  ├─ onEnd.js // 데이터 전송 완료 이벤트
-   │  └─ onError.js // 에러 발생 이벤트
+   │  ├─ env.js                                    // 환경 변수, 상수 관리
+   │  ├─ handlerIds.js                             // 핸들러ID
+   │  └─ header.js                                 // 패킷 헤더
+   ├─ db
+   │  ├─ migration                                 // 쿼리문 실행
+   │  │  └─ createSchemas.js
+   │  ├─ sql                                       // DB쿼리문
+   │  │  └─ user_db.sql
+   │  └─ database.js
+   ├─ events                                       // 이벤트별 분리
+   │  ├─ onConnection.js
+   │  ├─ onData.js
+   │  ├─ onEnd.js
+   │  └─ onError.js
    ├─ handlers
-   │  ├─ index.js // 핸들러 매핑을 위한 handler/index.js
+   │  ├─ game
+   │  │  └─ updateLocation.handler.js              // 위치 업데이트 핸들러
+   │  ├─ index.js                                  // 핸들러 매핑 handler/index.js
    │  └─ user
-   │     └─ initial.handler.js // 최초 접속 시 유저 정보처리 핸들러
+   │     └─ initial.handler.js                     // 최초 접속 시 유저 정보처리 핸들러
    ├─ init
-   │  ├─ assets.js // 데이터 파일 로드
-   │  ├─ index.js // 서버 초기화 작업 (init/index.js)
-   │  └─ loadProtos.js // 프로토 파일 로드
+   │  ├─ index.js                                  // 서버 초기화 작업 init/index.js
+   │  └─ loadProtos.js                             // 프로토콜 버퍼 로드
    ├─ protobuf
-   │  ├─ initial.proto // 최초 패킷 구조
-   │  ├─ packetNames.js // 패킷 이름 매핑
+   │  ├─ packetNames.js                            // 패킷 이름
    │  ├─ request
-   │  │  └─ common.proto // 공통 패킷 구조
+   │  │  ├─ common.proto                           // 공통 패킷 구조
+   │  │  ├─ game.proto                             // 게임 패킷 (위치 정보)
+   │  │  └─ initial.proto                          // 최초 패킷
    │  └─ response
-   │     └─ reponse.proto // 공통 응답 메시지 구조
-   ├─ server.js // 서버 코드
-   ├─ session
-   │  ├─ sessions.js // 각 유저세션, 게임세션을 추가할 배열들
-   │  └─ user.session.js // 세션 관리 함수(유저 추가, 삭제, 조회 등)
+   │     └─ reponse.proto                          // 공통 응답메시지 패킷
+   ├─ server.js
+   ├─ session                                      // 각 세션 관리
+   │  ├─ game.session.js
+   │  ├─ sessions.js
+   │  └─ user.session.js
    └─ utils
-      ├─ error
-      │  ├─ customError.js // CustomError 객체 (Class)
-      │  ├─ errorCodes.js // 사용자 정의 에러코드
-      │  └─ errorHandler.js // 에러 처리 핸들러
+      ├─ dateFormatter.js                          // 로그용 Date 포멧터
+      ├─ db
+      │  └─ testConnection.js                      // db연결 확인용 테스트 코드
+      ├─ error                                     // 에러 핸들링
+      │  ├─ customError.js
+      │  ├─ errorCodes.js
+      │  └─ errorHandler.js
+      ├─ notification
+      │  └─ game.notification.js                   // 게임 내 알림
       ├─ parser
-      │  └─ packetParser.js // 패킷 파싱(패킷 내용 해석, 검증 추가)
+      │  └─ packetParser.js                        // 패킷파서
       └─ response
-         └─ createResponse.js // 요청에 대한 반환 패킷 구성 함수
+         └─ createResponse.js                      // 응답메시지 생성
+
 ```

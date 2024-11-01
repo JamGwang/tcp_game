@@ -1,11 +1,16 @@
 // 서버 초기화 작업
-import { loadGameAssets } from './assets.js';
+import pools from '../db/database.js';
+import { testAllConnections } from '../utils/db/testConnection.js';
+import { addGameSession } from '../session/game.session.js';
 import { loadProtos } from './loadProtos.js';
+import { v4 as uuidv4 } from 'uuid';
 
 const initServer = async () => {
     try {
-        await loadGameAssets();
         await loadProtos();
+        const gameId = uuidv4();
+        const gameSession = addGameSession(gameId);
+        console.log(gameSession);
         // 다음 작업
     } catch (e) {
         console.error(e);
